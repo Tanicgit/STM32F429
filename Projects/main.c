@@ -33,7 +33,8 @@
 #include "stm32f429i_discovery_l3gd20.h"
 #include "stm32f429i_discovery_lcd.h"
 
-#include "delay.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /** @addtogroup Template
   * @{
   */ 
@@ -46,6 +47,7 @@
 
 /* Private functions ---------------------------------------------------------*/
 L3GD20_InitTypeDef L3gd20;
+extern void freeRtosInit(void);
 /**
   * @brief   Main program
   * @param  None
@@ -61,7 +63,6 @@ int main(void)
      */  
   
   /* Add your application code here */
-		delayInit();
     STM_EVAL_LEDInit(LED3);
 		STM_EVAL_LEDInit(LED4);
 		STM_EVAL_PBInit(BUTTON_USER,BUTTON_MODE_GPIO);
@@ -75,17 +76,12 @@ int main(void)
 		LTDC_LayerCmd(LTDC_Layer1, ENABLE);
 		LTDC_Cmd(ENABLE);
 		
-		LCD_SetTextColor(0);
-		LCD_SetBackColor(0xffff);
-		LCD_Clear(0xffff);
-		
-		LCD_DrawRect(50,50,100,100);
+		freeRtosInit();
+		vTaskStartScheduler();
   /* Infinite loop */
   while (1)
   {
-		delayms(300);
-		STM_EVAL_LEDToggle(LED3);
-		STM_EVAL_LEDToggle(LED4);
+
   }
 }
 
@@ -97,6 +93,27 @@ __weak uint32_t sEE_TIMEOUT_UserCallback(void)
 __weak uint32_t L3GD20_TIMEOUT_UserCallback(void)
 {
 	return 0;
+}
+
+
+void vApplicationIdleHook()
+{
+
+}
+
+void vApplicationStackOverflowHook()
+{
+
+}
+
+void vApplicationTickHook()
+{
+
+}
+
+void vApplicationMallocFailedHook()
+{
+
 }
 
 #ifdef  USE_FULL_ASSERT
