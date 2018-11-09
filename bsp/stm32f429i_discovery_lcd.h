@@ -85,7 +85,6 @@ typedef struct
  *         this driver is used (less precise timing).  
  */
 /* #define USE_Delay */
-
 #ifdef USE_Delay
 #include "main.h" 
   #define _delay_     Delay  /* !< User can provide more timing precise _delay_ function
@@ -305,6 +304,10 @@ void     LCD_DisplayOff(void);
 void     LCD_CtrlLinesConfig(void);
 void     LCD_CtrlLinesWrite(GPIO_TypeDef* GPIOx, uint16_t CtrlPins, BitAction BitVal);
 void     LCD_SPIConfig(void);
+
+
+void LCD_DrawLineX(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction,uint32_t color);
+void LCD_DrawFullRectX(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height,uint32_t color);
 /**
   * @}
   */    

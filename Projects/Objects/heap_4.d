@@ -1,0 +1,14 @@
+.\objects\heap_4.o: ..\Third_Party\Source\portable\MemMang\heap_4.c
+.\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\FreeRTOS.h
+.\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\heap_4.o: ..\Projects\FreeRTOSConfig.h
+.\objects\heap_4.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\projdefs.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\portable.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\deprecated_definitions.h
+.\objects\heap_4.o: ..\Third_Party\Source\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\mpu_wrappers.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\task.h
+.\objects\heap_4.o: ..\Third_Party\Source\include\list.h

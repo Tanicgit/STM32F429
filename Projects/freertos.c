@@ -11,14 +11,27 @@
 #include "stm32f429i_discovery_l3gd20.h"
 #include "stm32f429i_discovery_lcd.h"
 
+#include "GUI.h"
 BaseType_t xReturned1;
 TaskHandle_t xHandle1 = NULL;
 BaseType_t xReturned2;
 TaskHandle_t xHandle2 = NULL;
 
+//uint8_t testbuf[1024*1024]__attribute__((section("SD_RAM")));
 void vTaskCode1( void * pvParameters )
 {
-	configASSERT( ( ( uint32_t ) pvParameters ) == 1 );
+
+	GUI_Init();
+	GUI_SetBkColor(GUI_BLUE);
+	GUI_SetColor(GUI_WHITE);
+	GUI_Clear();
+	
+	GUI_SetFont(&GUI_Font32_1);
+	//GUI_DispStringAt("Hello world!", (LCD_GetXSize()-150)/2, (LCD_GetYSize()-20)/2);
+	//GUI_SetPenSize(3);
+	GUI_DrawLine(10,10,10,100);
+	GUI_DrawLine(10,10,100,100);
+	vTaskDelay(100);
 
 	for( ;; )
 	{
@@ -28,14 +41,19 @@ void vTaskCode1( void * pvParameters )
 	}
 }
 
+
 void vTaskCode2( void * pvParameters )
 {
-	configASSERT( ( ( uint32_t ) pvParameters ) == 1 );
-	LCD_SetTextColor(0);
-	LCD_SetBackColor(0xffff);
-	LCD_Clear(0xffff);
-	
-	LCD_DrawRect(50,50,100,100);
+
+//	LCD_SetTextColor(0);
+//	LCD_SetBackColor(0xffff);
+//	LCD_Clear(0xffff);
+//	
+//	LCD_DrawRect(50,50,100,100);
+//	
+//	LCD_DisplayChar(0,0,'h');
+//	
+//	drawHLine(0,0,50,0x1f00);
 	for( ;; )
 	{  
 		vTaskDelay(200);
@@ -45,9 +63,9 @@ void vTaskCode2( void * pvParameters )
 
 void freeRtosInit()
 {
-    xReturned1 = xTaskCreate(vTaskCode1, "TASK1",128, ( void * ) 1,tskIDLE_PRIORITY,&xHandle1 );     
+    xReturned1 = xTaskCreate(vTaskCode1, "TASK1",128, ( void * ) 1,2,&xHandle1 );     
 
-		xReturned2 = xTaskCreate(vTaskCode2, "TASK2",128, ( void * ) 1,tskIDLE_PRIORITY,&xHandle2 );  	
+		xReturned2 = xTaskCreate(vTaskCode2, "TASK2",128, ( void * ) 1,3,&xHandle2 );  	
 }
 
 

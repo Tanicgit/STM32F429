@@ -377,7 +377,7 @@ void LCD_LayerInit(void)
   
   /* Enable foreground & background Layers */
   LTDC_LayerCmd(LTDC_Layer1, ENABLE); 
-  LTDC_LayerCmd(LTDC_Layer2, ENABLE);
+ // LTDC_LayerCmd(LTDC_Layer2, ENABLE);
   
   /* LTDC configuration reload */  
   LTDC_ReloadConfig(LTDC_IMReload);
@@ -785,6 +785,50 @@ void LCD_DrawLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Directi
   
 }
 
+void LCD_DrawLineX(uint16_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction,uint32_t color) 
+{
+DMA2D_InitTypeDef      DMA2D_InitStruct;
+  
+  uint32_t  Xaddress = 0;
+  uint16_t Red_Value = 0, Green_Value = 0, Blue_Value = 0;
+  
+  Xaddress = CurrentFrameBuffer + 2*(LCD_PIXEL_WIDTH*Ypos + Xpos);
+ 
+  Red_Value = (0xF800 & color) >> 11;
+  Blue_Value = 0x001F & color;
+  Green_Value = (0x07E0 & color) >> 5;
+
+  /* Configure DMA2D */    
+  DMA2D_DeInit();  
+  DMA2D_InitStruct.DMA2D_Mode = DMA2D_R2M;       
+  DMA2D_InitStruct.DMA2D_CMode = DMA2D_RGB565;      
+  DMA2D_InitStruct.DMA2D_OutputGreen = Green_Value;      
+  DMA2D_InitStruct.DMA2D_OutputBlue = Blue_Value;     
+  DMA2D_InitStruct.DMA2D_OutputRed = Red_Value;                
+  DMA2D_InitStruct.DMA2D_OutputAlpha = 0x0F;                  
+  DMA2D_InitStruct.DMA2D_OutputMemoryAdd = Xaddress;                  
+  
+  if(Direction == LCD_DIR_HORIZONTAL)
+  {                                                      
+    DMA2D_InitStruct.DMA2D_OutputOffset = 0;                
+    DMA2D_InitStruct.DMA2D_NumberOfLine = 1;            
+    DMA2D_InitStruct.DMA2D_PixelPerLine = Length; 
+  }
+  else
+  {                                                            
+    DMA2D_InitStruct.DMA2D_OutputOffset = LCD_PIXEL_WIDTH - 1;                
+    DMA2D_InitStruct.DMA2D_NumberOfLine = Length;            
+    DMA2D_InitStruct.DMA2D_PixelPerLine = 1;  
+  }
+  
+  DMA2D_Init(&DMA2D_InitStruct);  
+  /* Start Transfer */ 
+  DMA2D_StartTransfer();  
+  /* Wait for CTC Flag activation */
+  while(DMA2D_GetFlagStatus(DMA2D_FLAG_TC) == RESET)
+  {
+  }
+}
 /**
   * @brief  Displays a rectangle.
   * @param  Xpos: specifies the X position, can be a value from 0 to 240.
@@ -1122,6 +1166,44 @@ void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   } 
 
   LCD_SetTextColor(CurrentTextColor);
+}
+
+void LCD_DrawFullRectX(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height,uint32_t color)
+{
+	DMA2D_InitTypeDef      DMA2D_InitStruct;
+  
+  uint32_t  Xaddress = 0; 
+  uint16_t Red_Value = 0, Green_Value = 0, Blue_Value = 0;
+ 
+  Red_Value = (0xF800 & color) >> 11;
+  Blue_Value = 0x001F & color;
+  Green_Value = (0x07E0 & color) >> 5;
+  
+  Xaddress = CurrentFrameBuffer + 2*(LCD_PIXEL_WIDTH*Ypos + Xpos);
+  
+  /* configure DMA2D */
+  DMA2D_DeInit();
+  DMA2D_InitStruct.DMA2D_Mode = DMA2D_R2M;       
+  DMA2D_InitStruct.DMA2D_CMode = DMA2D_RGB565;      
+  DMA2D_InitStruct.DMA2D_OutputGreen = Green_Value;      
+  DMA2D_InitStruct.DMA2D_OutputBlue = Blue_Value;     
+  DMA2D_InitStruct.DMA2D_OutputRed = Red_Value;                
+  DMA2D_InitStruct.DMA2D_OutputAlpha = 0x0F;                  
+  DMA2D_InitStruct.DMA2D_OutputMemoryAdd = Xaddress;                
+  DMA2D_InitStruct.DMA2D_OutputOffset = (LCD_PIXEL_WIDTH - Width);                
+  DMA2D_InitStruct.DMA2D_NumberOfLine = Height;            
+  DMA2D_InitStruct.DMA2D_PixelPerLine = Width;
+  DMA2D_Init(&DMA2D_InitStruct); 
+  
+  /* Start Transfer */ 
+  DMA2D_StartTransfer();
+  
+  /* Wait for CTC Flag activation */
+  while(DMA2D_GetFlagStatus(DMA2D_FLAG_TC) == RESET)
+  {
+  } 
+
+  //LCD_SetTextColor(CurrentTextColor);
 }
 
 /**

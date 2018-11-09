@@ -1,0 +1,15 @@
+.\objects\croutine.o: ..\Third_Party\Source\croutine.c
+.\objects\croutine.o: ..\Third_Party\Source\include\FreeRTOS.h
+.\objects\croutine.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\croutine.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\croutine.o: ..\Projects\FreeRTOSConfig.h
+.\objects\croutine.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
+.\objects\croutine.o: ..\Third_Party\Source\include\projdefs.h
+.\objects\croutine.o: ..\Third_Party\Source\include\portable.h
+.\objects\croutine.o: ..\Third_Party\Source\include\deprecated_definitions.h
+.\objects\croutine.o: ..\Third_Party\Source\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\croutine.o: ..\Third_Party\Source\include\mpu_wrappers.h
+.\objects\croutine.o: ..\Third_Party\Source\include\task.h
+.\objects\croutine.o: ..\Third_Party\Source\include\list.h
+.\objects\croutine.o: ..\Third_Party\Source\include\croutine.h
+.\objects\croutine.o: ..\Third_Party\Source\include\list.h

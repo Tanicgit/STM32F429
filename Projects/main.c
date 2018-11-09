@@ -69,11 +69,12 @@ int main(void)
 		sEE_Init();
 		IOE_Config();
 		IOE_TPITConfig();
-		L3GD20_Init(&L3gd20);
+	//	L3GD20_Init(&L3gd20);
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC, ENABLE);
+	//	SDRAM_Init();
 		LCD_Init();
 		LCD_LayerInit();
-		LCD_SetLayer(LCD_FOREGROUND_LAYER);
-		LTDC_LayerCmd(LTDC_Layer1, ENABLE);
+		LCD_SetLayer(LCD_BACKGROUND_LAYER);
 		LTDC_Cmd(ENABLE);
 		
 		freeRtosInit();
@@ -81,7 +82,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+		
   }
 }
 

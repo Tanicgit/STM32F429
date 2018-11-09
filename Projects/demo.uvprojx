@@ -52,7 +52,7 @@
           <OutputName>demo</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -209,7 +209,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -303,8 +303,8 @@
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x10000000</StartAddress>
-                <Size>0x10000</Size>
+                <StartAddress>0xd0000000</StartAddress>
+                <Size>0x100000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,USE_STM32F429I_DISCO,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Projects;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\bsp;..\Third_Party\Source\include;..\Third_Party\Source\portable\RVDS\ARM_CM4F</IncludePath>
+              <IncludePath>..\Projects;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\bsp;..\Third_Party\Source\include;..\Third_Party\Source\portable\RVDS\ARM_CM4F;..\Third_Party\STenWin\inc;..\Third_Party\STenWin\Config;..\Libraries\CMSIS\RTOS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -359,7 +359,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -368,7 +368,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\Objects\demo.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -670,6 +670,36 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Third_Party\Source\portable\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STemWin</GroupName>
+          <Files>
+            <File>
+              <FileName>STemWin540_CM4_OS_Keil_ot_ARGB.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\Third_Party\STenWin\Lib\STemWin540_CM4_OS_Keil_ot_ARGB.lib</FilePath>
+            </File>
+            <File>
+              <FileName>GUIConf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Third_Party\STenWin\Config\GUIConf.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDRV_Template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Third_Party\STenWin\Config\GUIDRV_Template.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCDConf_FlexColor_Template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Third_Party\STenWin\Config\LCDConf_FlexColor_Template.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_X_OS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Third_Party\STenWin\OS\GUI_X_OS.c</FilePath>
             </File>
           </Files>
         </Group>
